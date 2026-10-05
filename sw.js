@@ -1,4 +1,4 @@
-const CACHE="wg-price-v5-mobile";
+const CACHE="wg-price-v6-layout";
 const ASSETS=["./","./index.html","./style.css","./app.js","./config.js","./data.json","./manifest.webmanifest","./icon.png","./worldgym-logo.webp"];
 
 self.addEventListener("install",e=>{
