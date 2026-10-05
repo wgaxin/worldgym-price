@@ -79,7 +79,22 @@ async function init(){
     state.data=d;
     $("#updatedAt").textContent=`${d.meta.updated.replaceAll("-","/")} · ${d.meta.branchCount} 間分店`;
     renderCategories();renderRegions();renderBranches();
-    $("#searchInput").oninput=e=>{state.query=e.target.value;$("#clearSearch").hidden=!state.query;renderBranches()};
+    let searchScrollTimer=null;
+    $("#searchInput").oninput=e=>{
+      state.query=e.target.value;
+      $("#clearSearch").hidden=!state.query;
+      renderBranches();
+      clearTimeout(searchScrollTimer);
+      if(state.query.trim()){
+        searchScrollTimer=setTimeout(()=>{
+          const target=$("#branchResultsSection");
+          if(target && window.matchMedia("(max-width: 699px)").matches){
+            const top=target.getBoundingClientRect().top+window.scrollY-76;
+            window.scrollTo({top,behavior:"smooth"});
+          }
+        },450);
+      }
+    };
     $("#clearSearch").onclick=()=>{$("#searchInput").value="";state.query="";$("#clearSearch").hidden=true;renderBranches()};
     $("#navSearch").onclick=()=>{showView("#homeView");setTimeout(()=>$("#searchInput").focus(),100)};
     $$("[data-home]").forEach(x=>x.onclick=()=>showView("#homeView"));
