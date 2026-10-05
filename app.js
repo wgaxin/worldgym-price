@@ -88,7 +88,7 @@ async function init(){
       if(state.query.trim()){
         searchScrollTimer=setTimeout(()=>{
           const target=$("#branchResultsSection");
-          if(target && window.matchMedia("(max-width: 699px)").matches){
+          if(target && window.matchMedia("(max-width: 900px)").matches){
             const top=target.getBoundingClientRect().top+window.scrollY-76;
             window.scrollTo({top,behavior:"smooth"});
           }
